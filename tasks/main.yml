@@ -1,0 +1,11 @@
+---
+- block:
+    - name: Install and configure KMS Host
+      include: host/main.yml
+    - name: Configure KMS Host for Office
+      include: host/office.yml
+  when: is_kms_host
+
+- name: Configure client for activation with KMS
+  when: not is_kms_host
+  include: client/main.yml

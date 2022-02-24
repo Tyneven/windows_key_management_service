@@ -1,0 +1,20 @@
+---
+
+- name: Download Office volume licensing pack
+  win_get_url:
+    url: "{{ item.url_pack }}"
+    dest: "{{ item.setup_pack}}"
+  when: kms_office_install
+  loop: "{{ kms_office_informations }}" 
+
+- name: Install Office volume licensing pack
+  win_package: 
+    path: "{{ item.setup_pack}}"
+    product_id: auto
+    state: present
+    arguments:
+      - /q
+      - /full
+      - /norestart
+  when: kms_office_installation
+  loop: "{{ kms_office_informations }}"        

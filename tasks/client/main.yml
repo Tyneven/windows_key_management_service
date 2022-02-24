@@ -1,0 +1,11 @@
+---
+- name: add GVLK on Client
+  win_command: cscript slmgr.vbs /ipk "{{ item.gvlk }}"
+  when: item.os_edition == ansible_distribution and item.type == "os"
+  loop: kms_clients
+
+- name: Configure kms host on client
+  win_command: cscript slmgr.vbs /skms "{{ kms_hostname }}":"{{ kms_port }}"
+
+- name: Activate key with KMS Host
+  win_command: cscript slmgr.vbs /ato  

@@ -1,0 +1,28 @@
+---
+- name: Install KMS Feature
+  win_feature:
+    name: VolumeActivation
+    state: present
+    include_sub_features: yes
+    include_management_tools: yes
+
+- name: Configure Firewall Rule
+  community.windows.win_firewall_rule:
+    name: SPPSVC-In-TCP
+    action: allow
+    direction: in
+    profiles: Domain,Private
+    state: present
+    enabled: yes
+
+- name: Add KMS Licence key for OS
+  win_command: slmgr.vbs /ipk "{{ item.key }}"
+  when: not offline_installation
+  loop: "{{ kms_host_licences }}"
+
+- name: Activate KMS Licence key for OS
+  win_command: slmgr.vbs /ato
+  when: not offline_installation
+  loop: "{{ kms_host_licences }}"
+
+
