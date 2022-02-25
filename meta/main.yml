@@ -2,7 +2,7 @@
 galaxy_info:
   author: Judicaël LE NEVEN
   description: Role for Microsoft Windows KMS host and client
-  license: Apache version 2.0
+  license: MIT License
   min_ansible_version: 2.4
   platforms:
   - name: Windows
