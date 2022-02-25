@@ -1,5 +1,5 @@
 ---
-# vars file for Microsoft Windows_gvlk_management_service
+# vars file for Microsoft Windows_key_management_service
 
 kms_clients:
   - edition: 'Microsoft Windows Server 2022 Datacenter' 
